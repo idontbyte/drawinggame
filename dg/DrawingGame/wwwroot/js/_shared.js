@@ -11,5 +11,8 @@
         }).catch(function (err) {
             return alert(err.toString());
         });
+    },
+    DateToTicks: function (date) {
+        return (date.getTime() * 10000) + 621355968000000000;
     }
 };

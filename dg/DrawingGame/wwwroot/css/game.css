@@ -41,3 +41,12 @@ button {
     background: black;
     border: 2px solid white;
 }
+
+#gamewait {
+    padding: 10px;
+}
+
+.particle {
+    border: 2px solid white;
+    position: absolute;
+}

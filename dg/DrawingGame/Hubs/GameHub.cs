@@ -42,7 +42,7 @@ namespace DrawingGame.Hubs
                 _hubService.AddLobby(new Lobby()
                 {
                     Name = lobbyName,
-                    State = new GameState() { Players = new List<Player>() { new Player(playerName) } }
+                    State = new GameState() { Players = new List<Player>() { new Player(playerName, true) } }
                 });
                 var lobby = _hubService.GetHubState().Lobbies.Where(l => l.Name == lobbyName).Single();
                 await Groups.AddToGroupAsync(Context.ConnectionId, lobbyName);
@@ -64,6 +64,10 @@ namespace DrawingGame.Hubs
         }
 
 
+        public void CheckInDraw(string lobbyName, string playerName, List<Particle> particles)
+        {
+            _hubService.PlayerCheckIn(lobbyName, playerName, particles);
+        }
         public void CheckIn(string lobbyName, string playerName)
         {
             _hubService.PlayerCheckIn(lobbyName, playerName);
