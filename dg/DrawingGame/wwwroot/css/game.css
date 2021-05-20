@@ -23,8 +23,17 @@ button {
     padding: 10px;
 }
 
+#lobby {
+    float: left;
+    min-width: 200px;
+    padding: 20px;
+    border: 2px solid white;
+    min-height: 585px;
+}
+
 /* game */
 .game {
+    float: left;
     width: 1000px;
     position: relative;
     height: 625px;

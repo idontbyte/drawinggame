@@ -32,7 +32,7 @@ namespace DrawingGame
             // add singleton for hub state
             services.AddSingleton<HubState>();
             // add singleton for lobby state sender
-            //services.AddSingleton<LobbyStateSender>();
+            services.AddSingleton<LobbyStateSender>();
             // add transient hub service
             services.AddTransient<HubService>();
         }

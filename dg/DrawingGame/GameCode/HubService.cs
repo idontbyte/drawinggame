@@ -1,4 +1,5 @@
 ﻿using DrawingGame.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +17,14 @@ namespace DrawingGame.GameCode
         internal void RemoveDeadLobbies()
         {
             _hubState.Lobbies = _hubState.Lobbies.Where(x => x.RemoveMe == false).ToList();
+        }
+
+        internal void RemoveDeadPlayers()
+        {
+            foreach(var lobby in _hubState.Lobbies)
+            {
+                lobby.State.Players = lobby.State.Players.Where(x => x.RemoveMe == false).ToList();
+            }
         }
 
         internal List<Lobby> GetLobbies()
@@ -41,6 +50,13 @@ namespace DrawingGame.GameCode
         internal Lobby GetLobby(string lobbyName)
         {
             return _hubState.Lobbies.Where(l => l.Name == lobbyName).Single();
+        }
+
+        internal void PlayerCheckIn(string lobbyName, string playerName)
+        {
+            var lobby = GetLobby(lobbyName);
+            lobby.LastUpdate = DateTime.Now;
+            lobby.State.Players.Where(p => p.PlayerName == playerName).Single().LastUpdate = DateTime.Now;
         }
     }
 }

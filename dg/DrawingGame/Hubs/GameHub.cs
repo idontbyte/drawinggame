@@ -11,7 +11,7 @@ namespace DrawingGame.Hubs
     {
         private readonly HubService _hubService;
 
-        public GameHub(HubService hubService)
+        public GameHub(HubService hubService, LobbyStateSender lobbyStateSender)
         {
             _hubService = hubService;
         }
@@ -61,6 +61,12 @@ namespace DrawingGame.Hubs
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, "lobby");
             await Clients.Caller.SendAsync("JoinExistingLobby", lobby.State);
             await Clients.Groups(lobbyName).SendAsync("StateUpdate", lobby.State);
+        }
+
+
+        public async Task CheckIn(string lobbyName, string playerName)
+        {
+            _hubService.PlayerCheckIn(lobbyName, playerName);
         }
     }
 }

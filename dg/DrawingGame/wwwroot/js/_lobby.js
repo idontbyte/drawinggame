@@ -3,6 +3,7 @@
 ζ.Lobby = {
     PlayerName: '',
     LobbyName: '',
+    Players: [],
 
     Element_LobbyContainer: document.getElementsByClassName("lobbies")[0],
     Element_NameSubmit: document.getElementById("nameSubmit"),
@@ -12,6 +13,7 @@
     Element_LobbiesList: document.getElementsByClassName("lobbies-list")[0],
     Element_CreateLobbyButton: document.getElementById("newLobbyCreate"),
     Element_LobbyPlayersContainer: document.getElementById("lobby"),
+    Element_LobbyPlayersList: document.getElementById("lobbyplayers"),
 
     SetupEvents: function () {
         // Confirm Name Button
@@ -81,6 +83,14 @@
             ζ.Lobby.Element_LobbyPlayersContainer.style.display = "block";
             ζ.Game.Init();
         });
+    },
+
+    UpdatePlayers: function () {
+        ζ.Lobby.Element_LobbyPlayersList.innerHTML = '';
+        for (var i = 0; i < ζ.Lobby.Players.length; i++) {
+            var player = '<li>' + ζ.Lobby.Players[i].playerName + '</li>';
+            ζ.Lobby.Element_LobbyPlayersList.innerHTML += player;
+        }
     },
 
     JoinLobby: function (lobbyName) {

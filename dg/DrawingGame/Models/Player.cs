@@ -8,7 +8,8 @@ namespace DrawingGame.Models
         {
             PlayerName = playerName;
         }
-        public Guid Id { get; set; }
-        public string PlayerName { get; }
+        public string PlayerName { get; set;  }
+        public DateTime LastUpdate { get; set; }
+        public bool RemoveMe { get; set; }
     }
 }

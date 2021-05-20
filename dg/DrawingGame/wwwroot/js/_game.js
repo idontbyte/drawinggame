@@ -2,12 +2,7 @@
 
 ζ.Game = {
     State: {},
-
     Element_GameContainer: document.getElementsByClassName("game")[0],
-
-    StateUpdate: function () {
-        
-    },
 
     SetupListeners: function () {
         // Server sent lobby state update
@@ -17,12 +12,23 @@
         });
     },
 
-    ClientLoop: function () {
+    StateUpdate: function () {
+        ζ.Lobby.Players = ζ.Game.State.players;
+        ζ.Lobby.UpdatePlayers();
+    },
 
+    ClientLoop: function () {
+        ζ.Game.CheckInWithServer();
+    },
+
+    CheckInWithServer: function () {
+        VP.Shared.Connection.invoke("CheckIn", VP.Lobby.LobbyName, VP.Lobby.PlayerName).catch(function (err) {
+            return alert(err.toString());
+        });
     },
 
     Init: function () {
         ζ.Game.SetupListeners();
-        setInterval(ζ.Game.ClientLoop, 10);
+        setInterval(ζ.Game.ClientLoop, 1000);
     }
 };

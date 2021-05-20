@@ -4,6 +4,6 @@ namespace DrawingGame.Models
 {
     public class GameState
     {
-        public List<Player> Players;
+        public List<Player> Players { get; set; }
     }
 }
