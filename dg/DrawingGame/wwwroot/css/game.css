@@ -70,6 +70,11 @@ button {
     padding: 10px;
 }
 
+#gamewait > h1 {
+    position: fixed;
+    top: 0;
+}
+
 .particle {
     border: 2px solid white;
     position: absolute;
