@@ -62,8 +62,8 @@ button {
     position: relative;
     height: 625px;
     margin: auto;
-    background: black;
-    border: 2px solid white;
+    background: white;
+    box-shadow: 1px 1px 15px white;
 }
 
 #gamewait {
@@ -73,6 +73,7 @@ button {
 #gamewait > h1 {
     position: fixed;
     top: 0;
+    color: black;
 }
 
 .particle {
@@ -97,3 +98,17 @@ p.login-name {
     left: -25px;
 }
 
+ul.lobbies-list > li {
+    margin-top: 10px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+ul.lobbies-list > li button{
+    position: absolute;
+    right: 0; 
+}
+
+#lobby {
+    background-color: black;
+}
