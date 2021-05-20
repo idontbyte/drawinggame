@@ -11,6 +11,7 @@
     Element_NameDisplay: document.getElementById("name-display"),
     Element_LobbiesList: document.getElementsByClassName("lobbies-list")[0],
     Element_CreateLobbyButton: document.getElementById("newLobbyCreate"),
+    Element_LobbyPlayersContainer: document.getElementById("lobby"),
 
     SetupEvents: function () {
         // Confirm Name Button
@@ -65,6 +66,7 @@
                 ζ.Game.State = state;
                 ζ.Lobby.Element_LobbyContainer.style.display = "none";
                 ζ.Game.Element_GameContainer.style.display = "block";
+                ζ.Lobby.Element_LobbyPlayersContainer.style.display = "block";
                 ζ.Game.Init();
             } else {
                 alert("Sorry, that lobby already exists.. please try another name.")
@@ -76,6 +78,7 @@
             ζ.Game.State = state;
             ζ.Lobby.Element_LobbyContainer.style.display = "none";
             ζ.Game.Element_GameContainer.style.display = "block";
+            ζ.Lobby.Element_LobbyPlayersContainer.style.display = "block";
             ζ.Game.Init();
         });
     },
