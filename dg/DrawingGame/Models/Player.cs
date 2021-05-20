@@ -9,7 +9,7 @@ namespace DrawingGame.Models
             PlayerName = playerName;
         }
         public string PlayerName { get; set;  }
-        public DateTime LastUpdate { get; set; }
-        public bool RemoveMe { get; set; }
+        public DateTime LastUpdate { get; set; } = DateTime.Now;
+        public bool RemoveMe { get; set; } = false;
     }
 }

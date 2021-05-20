@@ -64,7 +64,7 @@ namespace DrawingGame.Hubs
         }
 
 
-        public async Task CheckIn(string lobbyName, string playerName)
+        public void CheckIn(string lobbyName, string playerName)
         {
             _hubService.PlayerCheckIn(lobbyName, playerName);
         }

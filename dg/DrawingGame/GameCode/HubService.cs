@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DrawingGame.GameCode
 {
@@ -21,7 +22,7 @@ namespace DrawingGame.GameCode
 
         internal void RemoveDeadPlayers()
         {
-            foreach(var lobby in _hubState.Lobbies)
+            foreach (var lobby in _hubState.Lobbies)
             {
                 lobby.State.Players = lobby.State.Players.Where(x => x.RemoveMe == false).ToList();
             }

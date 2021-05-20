@@ -22,7 +22,7 @@
     },
 
     CheckInWithServer: function () {
-        VP.Shared.Connection.invoke("CheckIn", VP.Lobby.LobbyName, VP.Lobby.PlayerName).catch(function (err) {
+        ζ.Shared.Connection.invoke("CheckIn", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName).catch(function (err) {
             return alert(err.toString());
         });
     },

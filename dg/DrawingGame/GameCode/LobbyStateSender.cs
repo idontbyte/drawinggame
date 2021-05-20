@@ -29,6 +29,7 @@ namespace DrawingGame.GameCode
         {
             SendStates(_hubService.GetLobbies());
             _hubService.RemoveDeadLobbies();
+            _hubService.RemoveDeadPlayers();
             _gameHubContext.Clients.Groups("lobby").SendAsync("LobbyUpdate", _hubService.GetHubState().Lobbies);
         }
         internal void SendStates(List<Lobby> lobbies)
