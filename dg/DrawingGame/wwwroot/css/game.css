@@ -30,6 +30,11 @@ button {
     margin-top: 0;
 }
 
+.lobbies > h3 {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
 #lobby {
     float: left;
     min-width: 200px;
@@ -38,13 +43,25 @@ button {
     min-height: 585px;
 }
 
+.lobbies-panel {
+    text-align: left;
+}
+
+.lobbies-panel button {
+    margin-left: 25px;
+}
+
+.lobbies-panel #name-display {
+    font-size: 1.75rem;
+}
+
 /* game */
 .game {
     float: left;
     width: 1000px;
     position: relative;
     height: 625px;
-    margin: 0 auto;
+    margin: auto;
     background: black;
     border: 2px solid white;
 }
@@ -74,3 +91,4 @@ p.login-name {
     position: relative;
     left: -25px;
 }
+
