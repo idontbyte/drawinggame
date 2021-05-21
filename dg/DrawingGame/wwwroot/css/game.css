@@ -121,3 +121,9 @@ ul.lobbies-list > li {
 #lobby {
     background-color: black;
 }
+
+#lobbyplayers li.active {
+    font-weight: bold;
+    color: gold;
+    font-size: 1.5rem;
+}
