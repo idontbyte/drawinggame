@@ -93,7 +93,7 @@ namespace DrawingGame.GameCode
             lobby.State.Drawing++;
             player.MyDraw = false;
             var playerIndex = lobby.State.Players.IndexOf(player);
-            if (playerIndex == lobby.State.Players.Count())
+            if (playerIndex == lobby.State.Players.Count() - 1)
             {
                 lobby.State.Players[0].MyDraw = true;
             } else

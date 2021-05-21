@@ -7,6 +7,7 @@
     Element_DrawingSection: document.getElementById("drawingsection"),
     Element_PlayerIsDrawing: document.getElementById("sectionName"),
     Element_AllParticles: document.getElementsByClassName("particle"),
+    Element_DoneButton: document.getElementById("saveImage"),
     DrawingSection: 1,
     DrawingSectionName: function () {
         switch (ζ.Game.DrawingSection) {
@@ -37,22 +38,24 @@
             })[0];
             if (myPlayer.myDraw === true) {
                 ζ.Game.MyDraw = true;
+                ζ.Game.Element_DoneButton.style.display = 'block';
             } else {
                 ζ.Game.MyDraw = false;
+                ζ.Game.Element_DoneButton.style.display = 'none';
             }
             ζ.Game.StateUpdate();
         });
 
         ζ.Shared.Connection.on('HeadSend', function (state) {
-            
+
         });
 
         ζ.Shared.Connection.on('LegSend', function (state) {
-            
+
         });
 
         ζ.Shared.Connection.on('BodySend', function (state) {
-            
+
         });
 
         ζ.Game.Element_GameContainer.onmousemove = function (e) {
@@ -73,9 +76,11 @@
         if (ζ.Game.Drawing === true && ζ.Game.GameOn === true && ζ.Game.MyDraw === true) {
             var x = Math.round(ζ.Game.MouseX / 4);
             var y = Math.round(ζ.Game.MouseY / 4);
-            if (ζ.Game.Particles[x][y] === 0) {
-                ζ.Game.Particles[x][y] = 1;
-                var particle = new Particle(x, y);
+            if (x > 0 && y > 0) {
+                if (ζ.Game.Particles[x][y] === 0) {
+                    ζ.Game.Particles[x][y] = 1;
+                    var particle = new Particle(x, y);
+                }
             }
         }
     },
@@ -93,6 +98,7 @@
             ζ.Game.Element_DrawingSection.style.display = 'none';
             ζ.Game.GameOn = false;
         }
+        ζ.Game.DrawingSection = ζ.Game.State.drawing;
 
         //if (ζ.Game.MyDraw === false) {
         //    for (var i = 0; i < ζ.Game.Element_AllParticles.length; i++) {
@@ -131,6 +137,9 @@
         ζ.Shared.Connection.invoke("FinishedDraw", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName, JSON.stringify(ζ.Game.Particles)).catch(function (err) {
             return console.log(err)
         });
+        while (ζ.Game.Element_AllParticles.length > 0) {
+            ζ.Game.Element_AllParticles[0].parentNode.removeChild(ζ.Game.Element_AllParticles[0]);
+        }
     },
 
     Init: function () {
