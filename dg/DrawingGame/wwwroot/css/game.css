@@ -159,3 +159,7 @@ ul.lobbies-list > li button {
     flex-direction: column;
     justify-content: center; 
 }
+
+#drawingpanel .flex > div {
+    height: 300px;
+}
