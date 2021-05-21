@@ -51,6 +51,9 @@
         });
 
         ζ.Shared.Connection.on('HeadSend', function (state) {
+            while (ζ.Game.Element_AllParticles.length > 0) {
+                ζ.Game.Element_AllParticles[0].parentNode.removeChild(ζ.Game.Element_AllParticles[0]);
+            }
             ζ.Game.Element_DrawingPanel.style.display = 'block';
             console.log(state)
             var parsedParticles = JSON.parse(state.particles);
