@@ -141,3 +141,13 @@ ul.lobbies-list > li button {
     color: gold;
     font-size: 1.5rem;
 }
+
+#drawingpanel {
+    float: right;
+    width: 400px;
+    height: 900px;
+    padding: 20px;
+    border: 2px solid white;
+    background: white;
+    margin: auto;
+}
