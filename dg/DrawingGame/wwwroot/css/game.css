@@ -113,13 +113,27 @@ ul.lobbies-list > li {
     padding-bottom: 10px;
 }
 
-    ul.lobbies-list > li button {
-        position: absolute;
-        right: 0;
-    }
+ul.lobbies-list > li button {
+    position: absolute;
+    right: 0;
+}
 
 #lobby {
     background-color: black;
+    position: relative;
+    flex-direction: column;
+    display: none;
+}
+
+#saveImage {
+    position: absolute;
+    bottom: -50px;
+    right: -1px;
+    border: 1px solid black;    
+}
+
+#lobby > button {
+    margin-top: auto;
 }
 
 #lobbyplayers li.active {

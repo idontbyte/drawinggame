@@ -7,48 +7,49 @@
 	<link href="~/css/game.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="connecting">
-		<marquee><p>Connecting . . . .</p></marquee>
-	</div>
-	<div class="lobbies" style="display: none;">
-		<h1>Draw</h1>
-		<h3>Lobbies</h3>
-		<div class="lobbies-player">
-			<p>Enter your name</p>
-			<p class="login-name">
-				<label>Name: </label>
-				<input id="name" type="text" onchange="ζ.Lobby.PlayerName = document.getElementById('name').value" />
-			</p>
-			<button id="nameSubmit">Continue</button>
-		</div>
-		<div class="lobbies-panel" style="display:none;">
-			<p>Welcome <span id="name-display"></span></p>
+    <div id="connecting">
+        <marquee><p>Connecting . . . .</p></marquee>
+    </div>
+    <div class="lobbies" style="display: none;">
+        <h1>Draw</h1>
+        <h3>Lobbies</h3>
+        <div class="lobbies-player">
+            <p>Enter your name</p>
+            <p class="login-name">
+                <label>Name: </label>
+                <input id="name" type="text" onchange="ζ.Lobby.PlayerName = document.getElementById('name').value" />
+            </p>
+            <button id="nameSubmit">Continue</button>
+        </div>
+        <div class="lobbies-panel" style="display:none;">
+            <p>Welcome <span id="name-display"></span></p>
 
-			<h4>Create Lobby</h4>
-			<p>
-				<label>New Lobby Name: </label>
-				<input id="newLobbyName" type="text" onchange="ζ.Lobby.LobbyName = document.getElementById('newLobbyName').value" />
-				<button id="newLobbyCreate">Create Lobby</button>
-			</p>
+            <h4>Create Lobby</h4>
+            <p>
+                <label>New Lobby Name: </label>
+                <input id="newLobbyName" type="text" onchange="ζ.Lobby.LobbyName = document.getElementById('newLobbyName').value" />
+                <button id="newLobbyCreate">Create Lobby</button>
+            </p>
 
-			<p>Or...</p>
+            <p>Or...</p>
 
-			<h4>Join Lobby</h4>
-			<ul class="lobbies-list">
-			</ul>
-		</div>
-	</div>
+            <h4>Join Lobby</h4>
+            <ul class="lobbies-list">
+            </ul>
+        </div>
+    </div>
 
-	<div id="lobby" style="display: none;">
-		<h2>Lobby Players</h2>
-		<ul id="lobbyplayers">
-		</ul>
-	</div>
+    <div id="lobby">
+        <h2>Lobby Players</h2>
+        <ul id="lobbyplayers">
+        </ul>        
+    </div>
 
-	<div class="game" style="display:none;">
-		<div id="gamewait"><h1>The game will begin when another player joins</h1></div>
-		<div id="drawingsection"><h1>Gold player is drawing: <span id="sectionName"></span></h1></div>
-	</div>
+    <div class="game" style="display:none;">
+        <div id="gamewait"><h1>The game will begin when another player joins</h1></div>
+        <div id="drawingsection"><h1>Player is drawing: <span id="sectionName"></span></h1></div>
+        <button id="saveImage">I'm done!</button>
+    </div>    
 
 	<div id="drawingpanel" style="display:none;">
 		<div id="head"></div>
@@ -58,16 +59,16 @@
 		<div id="legs"></div>
 	</div>
 
-	<template id="particle-template">
-		<particle class="particle"></particle>
-	</template>
+    <template id="particle-template">
+        <particle class="particle"></particle>
+    </template>
 
-	<script src="~/lib/dist/browser/signalr.js"></script>
-	<script src="~/js/vendor/extend.js"></script>
-	<script src="~/js/_shared.js"></script>
-	<script src="~/js/_particle.js"></script>
-	<script src="~/js/_lobby.js"></script>
-	<script src="~/js/_game.js"></script>
-	<script src="~/js/app.js"></script>
+    <script src="~/lib/dist/browser/signalr.js"></script>
+    <script src="~/js/vendor/extend.js"></script>
+    <script src="~/js/_shared.js"></script>
+    <script src="~/js/_particle.js"></script>
+    <script src="~/js/_lobby.js"></script>
+    <script src="~/js/_game.js"></script>
+    <script src="~/js/app.js"></script>
 </body>
 </html>
