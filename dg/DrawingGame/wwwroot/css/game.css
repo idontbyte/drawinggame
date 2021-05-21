@@ -83,6 +83,7 @@ button {
         position: fixed;
         top: 0;
         color: black;
+        background: transparent;
     }
 
     .particle {
@@ -150,4 +151,11 @@ ul.lobbies-list > li button {
     border: 2px solid white;
     background: white;
     margin: auto;
+}
+
+
+.flex {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center; 
 }
