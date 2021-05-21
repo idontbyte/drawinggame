@@ -10,8 +10,8 @@ namespace DrawingGame.Models
 
         public int Drawing { get; set; } = 1; // 1 = head, 2 = body, 3 = legs
 
-        private string HeadParticles { get; set; }
-        private string BodyParticles { get; set; }
-        private string LegsParticles { get; set; }
+        internal virtual string HeadParticles { get; set; }
+        internal virtual string BodyParticles { get; set; }
+        internal virtual string LegsParticles { get; set; }
     }
 }

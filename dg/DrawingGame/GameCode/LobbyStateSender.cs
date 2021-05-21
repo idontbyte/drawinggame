@@ -50,8 +50,31 @@ namespace DrawingGame.GameCode
                         player.RemoveMe = true;
                     }
                 }
-                
-                _gameHubContext.Clients.Groups(lobby.Name).SendAsync("StateUpdate", lobby.State);
+
+                switch (lobby.State.Drawing)
+                {
+                    case 4:
+                        lobby.State.Particles = lobby.State.HeadParticles;
+                        _gameHubContext.Clients.Groups(lobby.Name).SendAsync("HeadSend", lobby.State);
+                        lobby.State.Drawing = 5;
+                        break;
+
+                    case 5:
+                        lobby.State.Particles = lobby.State.BodyParticles;
+                        _gameHubContext.Clients.Groups(lobby.Name).SendAsync("BodySend", lobby.State);
+                        lobby.State.Drawing = 6;
+                        break;
+
+                    case 6:
+                        lobby.State.Particles = lobby.State.LegsParticles;
+                        _gameHubContext.Clients.Groups(lobby.Name).SendAsync("LegsSend", lobby.State);
+                        lobby.State.Drawing = 1;
+                        break;
+
+                    default:
+                        _gameHubContext.Clients.Groups(lobby.Name).SendAsync("StateUpdate", lobby.State);
+                        break;
+                }
             }
         }
     }

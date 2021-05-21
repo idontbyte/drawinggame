@@ -67,5 +67,39 @@ namespace DrawingGame.GameCode
             lobby.LastUpdate = DateTime.Now;
             lobby.State.Players.Where(p => p.PlayerName == playerName).Single().LastUpdate = DateTime.Now;
         }
+
+        internal void FinishedDraw(string lobbyName, string playerName, string particles)
+        {
+            var lobby = GetLobby(lobbyName);
+            lobby.LastUpdate = DateTime.Now;
+            var player = lobby.State.Players.Where(p => p.PlayerName == playerName).Single();
+            player.LastUpdate = DateTime.Now;
+            lobby.State.Particles = particles;
+            switch (lobby.State.Drawing)
+            {
+                case 1:
+                    lobby.State.HeadParticles = particles;
+                    break;
+
+                case 2:
+                    lobby.State.BodyParticles = particles;
+                    break;
+
+                case 3:
+                    lobby.State.LegsParticles = particles;
+                    // finish
+                    break;
+            }
+            lobby.State.Drawing++;
+            player.MyDraw = false;
+            var playerIndex = lobby.State.Players.IndexOf(player);
+            if (playerIndex == lobby.State.Players.Count())
+            {
+                lobby.State.Players[0].MyDraw = true;
+            } else
+            {
+                lobby.State.Players[playerIndex + 1].MyDraw = true;
+            }
+        }
     }
 }

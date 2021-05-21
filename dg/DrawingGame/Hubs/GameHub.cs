@@ -69,6 +69,10 @@ namespace DrawingGame.Hubs
         {
             _hubService.PlayerCheckIn(lobbyName, playerName, particles);
         }
+        public void FinishedDraw(string lobbyName, string playerName, string particles)
+        {
+            _hubService.FinishedDraw(lobbyName, playerName, particles);
+        }
         public void CheckIn(string lobbyName, string playerName)
         {
             _hubService.PlayerCheckIn(lobbyName, playerName);

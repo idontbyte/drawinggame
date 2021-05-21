@@ -43,6 +43,18 @@
             ζ.Game.StateUpdate();
         });
 
+        ζ.Shared.Connection.on('HeadSend', function (state) {
+            
+        });
+
+        ζ.Shared.Connection.on('LegSend', function (state) {
+            
+        });
+
+        ζ.Shared.Connection.on('BodySend', function (state) {
+            
+        });
+
         ζ.Game.Element_GameContainer.onmousemove = function (e) {
             var rect = e.target.getBoundingClientRect();
             ζ.Game.MouseX = e.clientX - rect.left - 12;
@@ -82,21 +94,21 @@
             ζ.Game.GameOn = false;
         }
 
-        if (ζ.Game.MyDraw === false) {
-            for (var i = 0; i < ζ.Game.Element_AllParticles.length; i++) {
-                ζ.Game.Element_AllParticles[i].parentNode.removeChild(ζ.Game.Element_AllParticles[i]);
-            }
+        //if (ζ.Game.MyDraw === false) {
+        //    for (var i = 0; i < ζ.Game.Element_AllParticles.length; i++) {
+        //        ζ.Game.Element_AllParticles[i].parentNode.removeChild(ζ.Game.Element_AllParticles[i]);
+        //    }
 
-            var parsedParticles = JSON.parse(ζ.Game.State.particles);
-            for (var x = 0; x < 200; x++) {
-                for (var y = 0; y < 150; y++) {
-                    ζ.Game.Particles[x][y] = parsedParticles[x][y];
-                    if (parsedParticles[x][y] === 1) {
-                        var particle = new Particle(x, y);
-                    } 
-                }
-            }
-        }
+        //    var parsedParticles = JSON.parse(ζ.Game.State.particles);
+        //    for (var x = 0; x < 200; x++) {
+        //        for (var y = 0; y < 150; y++) {
+        //            ζ.Game.Particles[x][y] = parsedParticles[x][y];
+        //            if (parsedParticles[x][y] === 1) {
+        //                var particle = new Particle(x, y);
+        //            } 
+        //        }
+        //    }
+        //}
     },
 
     ClientLoop: function () {
@@ -113,6 +125,12 @@
                 return console.log(err)
             });
         }
+    },
+
+    FinishedDraw: function () {
+        ζ.Shared.Connection.invoke("FinishedDraw", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName, JSON.stringify(ζ.Game.Particles)).catch(function (err) {
+            return console.log(err)
+        });
     },
 
     Init: function () {
