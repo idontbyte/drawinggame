@@ -8,6 +8,10 @@
     Element_PlayerIsDrawing: document.getElementById("sectionName"),
     Element_AllParticles: document.getElementsByClassName("particle"),
     Element_DoneButton: document.getElementById("saveImage"),
+    Element_DrawingPanel: document.getElementById("drawingpanel"),
+    Element_Head: document.getElementById("head"),
+    Element_Body: document.getElementById("body"),
+    Element_Legs: document.getElementById("legs"),
     DrawingSection: 1,
     DrawingSectionName: function () {
         switch (ζ.Game.DrawingSection) {
@@ -47,15 +51,39 @@
         });
 
         ζ.Shared.Connection.on('HeadSend', function (state) {
-
-        });
-
-        ζ.Shared.Connection.on('LegSend', function (state) {
-
+            ζ.Game.Element_DrawingPanel.style.display = 'block';
+            console.log(state)
+            var parsedParticles = JSON.parse(state.particles);
+            console.log(parsedParticles)
+            for (var x = 0; x < 200; x++) {
+                for (var y = 0; y < 150; y++) {
+                    if (parsedParticles[x][y] === 1) {
+                        var particle = new ParticleInElement(x, y, ζ.Game.Element_Head);
+                    }
+                }
+            }
         });
 
         ζ.Shared.Connection.on('BodySend', function (state) {
+            var parsedParticles = JSON.parse(state.particles);
+            for (var x = 0; x < 200; x++) {
+                for (var y = 0; y < 150; y++) {
+                    if (parsedParticles[x][y] === 1) {
+                        var particle = new ParticleInElement(x, y, ζ.Game.Element_Body);
+                    }
+                }
+            }
+        });
 
+        ζ.Shared.Connection.on('LegsSend', function (state) {
+            var parsedParticles = JSON.parse(state.particles);
+            for (var x = 0; x < 200; x++) {
+                for (var y = 0; y < 150; y++) {
+                    if (parsedParticles[x][y] === 1) {
+                        var particle = new ParticleInElement(x, y, ζ.Game.Element_Legs);
+                    }
+                }
+            }
         });
 
         ζ.Game.Element_GameContainer.onmousemove = function (e) {
@@ -100,21 +128,7 @@
         }
         ζ.Game.DrawingSection = ζ.Game.State.drawing;
 
-        //if (ζ.Game.MyDraw === false) {
-        //    for (var i = 0; i < ζ.Game.Element_AllParticles.length; i++) {
-        //        ζ.Game.Element_AllParticles[i].parentNode.removeChild(ζ.Game.Element_AllParticles[i]);
-        //    }
 
-        //    var parsedParticles = JSON.parse(ζ.Game.State.particles);
-        //    for (var x = 0; x < 200; x++) {
-        //        for (var y = 0; y < 150; y++) {
-        //            ζ.Game.Particles[x][y] = parsedParticles[x][y];
-        //            if (parsedParticles[x][y] === 1) {
-        //                var particle = new Particle(x, y);
-        //            } 
-        //        }
-        //    }
-        //}
     },
 
     ClientLoop: function () {
@@ -139,6 +153,14 @@
         });
         while (ζ.Game.Element_AllParticles.length > 0) {
             ζ.Game.Element_AllParticles[0].parentNode.removeChild(ζ.Game.Element_AllParticles[0]);
+        }
+        for (var x = 0; x < 200; x++) {
+            ζ.Game.Particles[x] = new Array(2);
+        }
+        for (var x = 0; x < 200; x++) {
+            for (var y = 0; y < 150; y++) {
+                ζ.Game.Particles[x][y] = 0;
+            }
         }
     },
 
