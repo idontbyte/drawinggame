@@ -53,12 +53,12 @@ namespace DrawingGame.GameCode
             return _hubState.Lobbies.Where(l => l.Name == lobbyName).Single();
         }
 
-        internal void PlayerCheckIn(string lobbyName, string playerName, List<Particle> particles)
+        internal void PlayerCheckIn(string lobbyName, string playerName, string particles)
         {
             var lobby = GetLobby(lobbyName);
             lobby.LastUpdate = DateTime.Now;
             lobby.State.Players.Where(p => p.PlayerName == playerName).Single().LastUpdate = DateTime.Now;
-            lobby.State.Particles.AddRange(particles);
+            lobby.State.Particles = particles;
         }
 
         internal void PlayerCheckIn(string lobbyName, string playerName)

@@ -57,7 +57,7 @@
                 ζ.Lobby.Element_LobbiesList.innerHTML +=
                     "<li>"
                     + lobby.name
-                    + "<button id=\"join" + lobby.name + "\" " 
+                    + "<button id=\"join" + lobby.name + "\" "
                     + "onclick=\"ζ.Lobby.JoinLobby('" + lobby.name + "')\">Join</button></li>";
             })
         });
@@ -88,7 +88,11 @@
     UpdatePlayers: function () {
         ζ.Lobby.Element_LobbyPlayersList.innerHTML = '';
         for (var i = 0; i < ζ.Lobby.Players.length; i++) {
-            var player = '<li>' + ζ.Lobby.Players[i].playerName + '</li>';
+            if (ζ.Lobby.Players[i].myDraw === true) {
+                var player = '<li class="active">' + ζ.Lobby.Players[i].playerName + '</li>';
+            } else {
+                var player = '<li>' + ζ.Lobby.Players[i].playerName + '</li>';
+            }
             ζ.Lobby.Element_LobbyPlayersList.innerHTML += player;
         }
     },

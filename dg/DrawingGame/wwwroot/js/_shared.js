@@ -9,7 +9,7 @@
             document.getElementById("connecting").style.display = "none";
             document.getElementsByClassName("lobbies")[0].style.display = "block";
         }).catch(function (err) {
-            return alert(err.toString());
+            return console.log(err)
         });
     },
     DateToTicks: function (date) {

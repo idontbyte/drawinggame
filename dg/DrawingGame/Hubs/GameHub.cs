@@ -1,6 +1,7 @@
 ﻿using DrawingGame.GameCode;
 using DrawingGame.Models;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace DrawingGame.Hubs
         }
 
 
-        public void CheckInDraw(string lobbyName, string playerName, List<Particle> particles)
+        public void CheckInDraw(string lobbyName, string playerName, string particles)
         {
             _hubService.PlayerCheckIn(lobbyName, playerName, particles);
         }

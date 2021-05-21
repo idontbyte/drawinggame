@@ -26,7 +26,8 @@ namespace DrawingGame
                 .AddRazorRuntimeCompilation();
 
             // add signalr for realtime messaging
-            services.AddSignalR();
+            services.AddSignalR(options => options.MaximumReceiveMessageSize = 70000)
+                .AddNewtonsoftJsonProtocol();
 
 
             // add singleton for hub state

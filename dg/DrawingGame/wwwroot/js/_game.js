@@ -4,7 +4,20 @@
     State: {},
     Element_GameContainer: document.getElementsByClassName("game")[0],
     Element_GameWait: document.getElementById("gamewait"),
+    Element_DrawingSection: document.getElementById("drawingsection"),
+    Element_PlayerIsDrawing: document.getElementById("sectionName"),
     Element_AllParticles: document.getElementsByClassName("particle"),
+    DrawingSection: 1,
+    DrawingSectionName: function () {
+        switch (ζ.Game.DrawingSection) {
+            case 1:
+                return "Head";
+            case 2:
+                return "Body";
+            case 3:
+                return "Legs";
+        }
+    },
     MouseX: 0,
     MouseY: 0,
     Particles: [],
@@ -46,8 +59,12 @@
 
     DrawLoop: function () {
         if (ζ.Game.Drawing === true && ζ.Game.GameOn === true && ζ.Game.MyDraw === true) {
-            var particle = new Particle(ζ.Shared.DateToTicks(new Date()), ζ.Game.MouseX, ζ.Game.MouseY);
-            ζ.Game.Particles.push(particle);
+            var x = Math.round(ζ.Game.MouseX / 4);
+            var y = Math.round(ζ.Game.MouseY / 4);
+            if (ζ.Game.Particles[x][y] === 0) {
+                ζ.Game.Particles[x][y] = 1;
+                var particle = new Particle(x, y);
+            }
         }
     },
 
@@ -56,9 +73,12 @@
         ζ.Lobby.UpdatePlayers();
         if (ζ.Lobby.Players.length > 1) {
             ζ.Game.Element_GameWait.style.display = 'none';
+            ζ.Game.Element_DrawingSection.style.display = 'block';
+            ζ.Game.Element_PlayerIsDrawing.innerHTML = ζ.Game.DrawingSectionName();
             ζ.Game.GameOn = true;
         } else {
             ζ.Game.Element_GameWait.style.display = 'block';
+            ζ.Game.Element_DrawingSection.style.display = 'none';
             ζ.Game.GameOn = false;
         }
 
@@ -66,9 +86,15 @@
             for (var i = 0; i < ζ.Game.Element_AllParticles.length; i++) {
                 ζ.Game.Element_AllParticles[i].parentNode.removeChild(ζ.Game.Element_AllParticles[i]);
             }
-            for (var i = 0; i < ζ.Game.State.particles.length; i++) {
-                var particle = new Particle(ζ.Game.State.particles[i].id, ζ.Game.State.particles[i].left, ζ.Game.State.particles[i].top);
-                ζ.Game.Particles.push(particle)
+
+            var parsedParticles = JSON.parse(ζ.Game.State.particles);
+            for (var x = 0; x < 200; x++) {
+                for (var y = 0; y < 150; y++) {
+                    ζ.Game.Particles[x][y] = parsedParticles[x][y];
+                    if (parsedParticles[x][y] === 1) {
+                        var particle = new Particle(x, y);
+                    } 
+                }
             }
         }
     },
@@ -79,29 +105,27 @@
 
     CheckInWithServer: function () {
         if (ζ.Game.MyDraw === true) {
-
-            var particlesToSend = ζ.Game.Particles.filter(function (x) {
-                if (x.Sent === false) {
-                    x.Sent = true;
-                    return true;
-                }
-                return false;
+            ζ.Shared.Connection.invoke("CheckInDraw", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName, JSON.stringify(ζ.Game.Particles)).catch(function (err) {
+                return console.log(err)
             });
-
-            ζ.Shared.Connection.invoke("CheckInDraw", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName, particlesToSend).catch(function (err) {
-                return alert(err.toString());
-            });
-
-
         } else {
             ζ.Shared.Connection.invoke("CheckIn", ζ.Lobby.LobbyName, ζ.Lobby.PlayerName).catch(function (err) {
-                return alert(err.toString());
+                return console.log(err)
             });
         }
     },
 
     Init: function () {
+        for (var x = 0; x < 200; x++) {
+            ζ.Game.Particles[x] = new Array(2);
+        }
+        for (var x = 0; x < 200; x++) {
+            for (var y = 0; y < 150; y++) {
+                ζ.Game.Particles[x][y] = 0;
+            }
+        }
         ζ.Game.SetupListeners();
+
         setInterval(ζ.Game.ClientLoop, 1000);
         setInterval(ζ.Game.DrawLoop, 1);
     }
